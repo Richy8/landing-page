@@ -1,0 +1,66 @@
+<template>
+  <div class="tutor-brochure-card rounded-20">
+    <!-- SPIRALS -->
+    <img v-lazy="loadAsset('Spirals.svg', 'tutor')" alt="" class="spirals-bg" />
+
+    <!-- BROCHURE ICON -->
+    <img
+      :src="loadAsset('BrochureImg.png', 'tutor')"
+      alt=""
+      class="brochure-img index-1"
+    />
+
+    <div class="title-text white-text font-weight-700 text-center">
+      Download the brochure
+    </div>
+
+    <div class="description-text white-text text-center">
+      Take a look at our unified curriculum. Built to suite whichever
+      examination you are preparing for.
+    </div>
+
+    <button class="btn btn-whitish">
+      Download Broachure <span class="icon-download gfont-16 mgl-10"></span>
+    </button>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "tutorProchureCard",
+};
+</script>
+
+<style lang="scss" scoped>
+.tutor-brochure-card {
+  padding: toRem(50) toRem(30);
+  @include flex-column-center;
+  background: #004680;
+  height: toRem(470);
+  position: relative;
+  overflow: hidden;
+  width: 32%;
+
+  .spirals-bg {
+    position: absolute;
+    height: auto;
+    width: 100%;
+    left: 0;
+    top: 0;
+  }
+
+  .brochure-img {
+    margin-bottom: toRem(20);
+  }
+
+  .title-text {
+    @include font-height(18, 28);
+    margin-bottom: toRem(10);
+  }
+
+  .description-text {
+    @include font-height(13.75, 24);
+    margin-bottom: toRem(30);
+  }
+}
+</style>

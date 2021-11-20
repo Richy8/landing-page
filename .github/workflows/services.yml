@@ -3,7 +3,7 @@ name: Services
 on:
   push:
     branches:
-      - dev
+      - test
 
 jobs:
   # I commented this out because tracking library from the app always make the app failed
@@ -26,7 +26,7 @@ jobs:
         node-version: ['14.x']
         appname: ['gradely-aws-codedeploy']
         application-deploy-name: ['GradelyMain']
-        deploy-group: ['GradelyLanding2.1Dev']
+        deploy-group: ['GradelyLanding2.1Test']
         s3-bucket: ['gradely-aws-codedeploy']
         s3-filename: ['gradely-aws-codedeploy-${{ github.sha }}']
 

@@ -25,7 +25,7 @@ jobs:
         python-version: [3.8]
         node-version: ['14.x']
         appname: ['gradely-aws-codedeploy']
-        application-deploy-name: ['GradelyMain']
+        application-deploy-name: ['GradelyReferralTest']
         deploy-group: ['GradelyLanding2.1Test']
         s3-bucket: ['gradely-aws-codedeploy']
         s3-filename: ['gradely-aws-codedeploy-${{ github.sha }}']

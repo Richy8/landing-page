@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd /var/www/vue/test/landing
+cd /var/www/dev/landing2
 npm run build

@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /var/www/vue/test/landing
+    destination: /var/www/dev/landing2
 hooks:
   AfterInstall:
     - location: scripts/install-app.sh

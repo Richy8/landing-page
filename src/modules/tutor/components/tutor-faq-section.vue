@@ -74,6 +74,26 @@ export default {
   .title-text {
     @include font-height(33, 58);
     margin-bottom: toRem(47);
+
+    @include breakpoint-down(lg) {
+      @include font-height(30, 55);
+      margin-bottom: toRem(40);
+    }
+
+    @include breakpoint-down(md) {
+      @include font-height(28, 52);
+      margin-bottom: toRem(37);
+    }
+
+    @include breakpoint-down(sm) {
+      @include font-height(25, 48);
+      margin-bottom: toRem(35);
+    }
+
+    @include breakpoint-down(xs) {
+      @include font-height(23, 35);
+      margin-bottom: toRem(32);
+    }
   }
 
   .faq-section {

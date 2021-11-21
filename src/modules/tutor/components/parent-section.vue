@@ -37,9 +37,9 @@
             class="blue-shade"
           />
 
-          <parent-card />
-          <parent-card />
-          <parent-card />
+          <parent-card parent_image="ParentOne.png" active />
+          <parent-card parent_image="ParentTwo.png" :active="false" />
+          <parent-card parent_image="ParentThree.png" :active="false" />
         </div>
       </div>
     </div>
@@ -66,6 +66,25 @@ export default {
     @include font-height(38, 53);
     margin-bottom: toRem(10);
     width: 25%;
+
+    @include breakpoint-down(xl) {
+      width: 28%;
+    }
+
+    @include breakpoint-down(lg) {
+      @include font-height(34, 48);
+      width: 32%;
+    }
+
+    @include breakpoint-down(md) {
+      @include font-height(30, 45);
+      width: 50%;
+    }
+
+    @include breakpoint-down(xs) {
+      @include font-height(27, 40);
+      width: 70%;
+    }
   }
 
   .parent-bottom {
@@ -76,23 +95,56 @@ export default {
       padding-top: toRem(40);
       width: 22%;
 
+      @include breakpoint-down(lg) {
+        padding-top: toRem(35);
+      }
+
+      @include breakpoint-down(md) {
+        width: 100%;
+        order: 2;
+      }
+
       .quotation {
         @include rectangle-shape(32, 28);
         margin-bottom: toRem(10);
+
+        @include breakpoint-down(lg) {
+          @include rectangle-shape(28, 25);
+        }
+
+        @include breakpoint-down(xs) {
+          @include rectangle-shape(24, 21);
+        }
       }
 
       .text {
         @include font-height(15, 30);
         margin-bottom: toRem(30);
+
+        @include breakpoint-down(lg) {
+          @include font-height(14, 28);
+        }
+
+        @include breakpoint-down(xs) {
+          @include font-height(13, 24);
+        }
       }
 
       .title-text {
         @include font-height(14.5, 19);
         margin-bottom: toRem(5);
+
+        @include breakpoint-down(xs) {
+          @include font-height(13, 18);
+        }
       }
 
       .description-text {
         @include font-height(13, 18);
+
+        @include breakpoint-down(xs) {
+          @include font-height(12, 17);
+        }
       }
     }
 
@@ -100,6 +152,13 @@ export default {
       @include flex-row-end-wrap;
       align-items: flex-start;
       width: 73%;
+
+      @include breakpoint-down(md) {
+        @include flex-row-start-wrap;
+        margin-top: toRem(30);
+        width: 100%;
+        order: 1;
+      }
 
       .blue-shade {
         position: absolute;

@@ -41,6 +41,14 @@ export default {
   overflow: hidden;
   width: 32%;
 
+  @include breakpoint-down(lg) {
+    padding: toRem(50) toRem(15);
+  }
+
+  @include breakpoint-down(md) {
+    width: 100%;
+  }
+
   .spirals-bg {
     position: absolute;
     height: auto;
@@ -56,11 +64,19 @@ export default {
   .title-text {
     @include font-height(18, 28);
     margin-bottom: toRem(10);
+
+    @include breakpoint-down(lg) {
+      @include font-height(16, 25);
+    }
   }
 
   .description-text {
     @include font-height(13.75, 24);
     margin-bottom: toRem(30);
+
+    @include breakpoint-down(lg) {
+      @include font-height(12.75, 21);
+    }
   }
 }
 </style>

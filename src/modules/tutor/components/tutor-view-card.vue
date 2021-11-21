@@ -1,5 +1,8 @@
 <template>
-  <div class="tutor-view-card">
+  <div
+    class="tutor-view-card pointer smooth-transition"
+    @click="toggleGroupModal"
+  >
     <div class="tutor-display rounded-20 overflow-hidden">
       <tutor-wavy-bg :card_color="card_color" />
 
@@ -10,36 +13,53 @@
       </div>
 
       <!-- TUTOR IMAGE -->
-      <img :src="loadAsset('damola.png', 'tutor')" alt="" class="tutor-img" />
+      <img :src="loadAsset(tutor.image, 'tutor')" alt="" class="tutor-img" />
     </div>
 
     <!-- TOP TEXT -->
     <div class="top-text color-grey-dark">
-      JOIN: <span class="color-text font-weight-700">Oyindamola Ajewole</span>
+      JOIN: <span class="color-text font-weight-700">{{ tutor.name }}</span>
     </div>
 
     <!-- MID TEXT -->
-    <div class="mid-text brand-navy font-weight-700">Simple Present Tense</div>
+    <div class="mid-text brand-navy font-weight-700">{{ tutor.topic }}</div>
 
     <!-- BOTTOM TEXT -->
     <div class="bottom-text color-grey-dark">
-      <span class="date-time">Tue, Nov 16, 11:00 AM</span>
+      <span class="date-time">{{ tutor.date }}</span>
       <span class="dot"></span>
-      <span class="class-name">Primary 2</span>
+      <span class="class-name">{{ tutor.class }}</span>
       <span class="dot"></span>
-      <span class="status brand-tonic font-weight-700">FREE</span>
+      <span class="status brand-tonic font-weight-700 text-uppercase">{{
+        tutor.status
+      }}</span>
     </div>
+
+    <!-- MODALS -->
+    <portal to="gradely-modals">
+      <transition name="fade" v-if="show_group_modal">
+        <group-session-modal @closeTriggered="toggleGroupModal" />
+      </transition>
+
+      <transition name="fade" v-if="show_auth_modal">
+        <tutor-auth-modal @closeTriggered="toggleAuthModal" />
+      </transition>
+    </portal>
   </div>
 </template>
 
 <script>
 import tutorWavyBg from "@/modules/tutor/components/tutor-wavy-bg";
+import groupSessionModal from "@/modules/tutor/modals/group-session-modal";
+import tutorAuthModal from "@/modules/tutor/modals/tutor-auth-modal";
 
 export default {
   name: "tuTorViewCard",
 
   components: {
     tutorWavyBg,
+    groupSessionModal,
+    tutorAuthModal,
   },
 
   props: {
@@ -48,7 +68,22 @@ export default {
     },
 
     tutor: {
-      type: String,
+      type: Object,
+    },
+  },
+
+  data: () => ({
+    show_group_modal: false,
+    show_auth_modal: false,
+  }),
+
+  methods: {
+    toggleGroupModal() {
+      this.show_group_modal = !this.show_group_modal;
+    },
+
+    toggleAuthModal() {
+      this.show_auth_modal = !this.show_auth_modal;
     },
   },
 };
@@ -58,11 +93,20 @@ export default {
 .tutor-view-card {
   margin-right: toRem(14);
 
+  @include breakpoint-down(lg) {
+    margin-right: toRem(10);
+  }
+
   .tutor-display {
     margin-bottom: toRem(10);
-    height: toRem(170);
     position: relative;
-    width: toRem(285);
+    height: toRem(175);
+    width: toRem(275);
+
+    @include breakpoint-down(lg) {
+      width: toRem(240);
+      height: toRem(145);
+    }
 
     .live-alert-card {
       background: rgba(255, 255, 255, 0.5);
@@ -89,21 +133,38 @@ export default {
       @include center-x;
       z-index: 1;
       bottom: 0;
+
+      @include breakpoint-down(lg) {
+        height: toRem(135);
+        width: auto;
+      }
     }
   }
 
   .top-text {
-    @include font-height(12.75, 18);
+    @include font-height(12.65, 18);
     margin-bottom: toRem(5);
+
+    @include breakpoint-down(lg) {
+      @include font-height(12, 17);
+    }
   }
 
   .mid-text {
-    @include font-height(15, 22);
+    @include font-height(14, 21);
     margin-bottom: toRem(8);
+
+    @include breakpoint-down(lg) {
+      @include font-height(13, 19);
+    }
   }
 
   .bottom-text {
-    @include font-height(12.75, 18);
+    @include font-height(12.5, 18);
+
+    @include breakpoint-down(lg) {
+      @include font-height(11.75, 17);
+    }
   }
 
   .dot {

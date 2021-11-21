@@ -8,7 +8,7 @@ LABEL COMPACT STYLING
     background: $white-text;
     padding: toRem(1) toRem(4);
     text-transform: uppercase;
-    font-size: toRem(11.75);
+    font-size: toRem(11.25);
     color: $color-ash;
     font-weight: 600;
     z-index: 99;
@@ -30,7 +30,7 @@ LABEL COMPACT STYLING
 // INPUT AND LABEL COMPACT STYLING
 .compact-row {
     position: relative;
-    margin-bottom: toRem(35);
+    margin-bottom: toRem(25);
 
     .label-compact {
         @include label_compact;
@@ -61,6 +61,39 @@ LABEL COMPACT STYLING
     select {
         @include breakpoint-down(xs) {
             @include font-height(11.75, 16);
+        }
+    }
+}
+
+.input-group {
+    position: relative;
+
+    .area-code {
+        @include center-y;
+        left: toRem(10);
+        z-index: 99;
+
+        .avatar {
+            @include square-shape(17);
+            margin-right: toRem(6);
+        }
+
+        .code {
+            @include font-height(12, 16);
+            margin-top: toRem(1);
+            color: $color-ash;
+        }
+    }
+
+    .addon {
+        @include center-y;
+        right: toRem(10);
+        z-index: 99;
+        font-size: toRem(19);
+        cursor: pointer;
+
+        @include breakpoint-down(lg) {
+            font-size: toRem(16);
         }
     }
 }

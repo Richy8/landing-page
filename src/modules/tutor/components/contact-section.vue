@@ -96,10 +96,32 @@ export default {
 
     .help-text {
       @include font-height(19, 32);
+
+      @include breakpoint-down(lg) {
+        @include font-height(16, 28);
+      }
+
+      @include breakpoint-down(sm) {
+        @include font-height(14.75, 22);
+      }
     }
 
     .btn {
       padding: toRem(13) toRem(36);
+
+      @include breakpoint-down(sm) {
+        padding: toRem(12) toRem(33);
+      }
+    }
+
+    .phone {
+      @include breakpoint-down(lg) {
+        @include font-height(14.5, 22);
+      }
+
+      @include breakpoint-down(sm) {
+        @include font-height(14, 20);
+      }
     }
 
     .sponsor-section {
@@ -107,6 +129,16 @@ export default {
 
       .title-text {
         @include font-height(17, 22);
+
+        @include breakpoint-down(lg) {
+          @include font-height(14.5, 20);
+          margin-bottom: toRem(30) !important;
+        }
+
+        @include breakpoint-down(sm) {
+          @include font-height(13.75, 19);
+          margin-bottom: toRem(40) !important;
+        }
       }
 
       .sponsor-row {
@@ -114,6 +146,10 @@ export default {
 
         img {
           margin: 0 toRem(18);
+
+          @include breakpoint-down(xs) {
+            margin: toRem(10) toRem(18);
+          }
         }
       }
     }

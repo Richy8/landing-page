@@ -50,19 +50,49 @@ export default {
   .top {
     @include flex-row-between-nowrap;
 
+    @include breakpoint-down(sm) {
+      align-items: flex-start;
+    }
+
     .top-text {
       @include font-height(16, 26);
       color: #004680;
+
+      @include breakpoint-down(md) {
+        @include font-height(14.5, 25);
+      }
+
+      @include breakpoint-down(sm) {
+        @include font-height(13.75, 23);
+      }
+
+      @include breakpoint-down(xs) {
+        @include font-height(13, 21);
+      }
     }
 
     .icon {
       font-size: toRem(20);
+
+      @include breakpoint-down(sm) {
+        position: relative;
+        top: toRem(2);
+        margin-left: toRem(20);
+      }
     }
   }
 
   .bottom {
     @include font-height(13.5, 21);
     margin-top: toRem(16);
+
+    @include breakpoint-down(md) {
+      @include font-height(13, 20);
+    }
+
+    @include breakpoint-down(sm) {
+      @include font-height(12.5, 19);
+    }
   }
 }
 </style>

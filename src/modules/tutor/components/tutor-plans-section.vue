@@ -15,8 +15,11 @@
 
       <!-- PLAN ROW -->
       <div class="plan-row position-relative">
-        <tutor-plan-card />
-        <tutor-plan-card />
+        <tutor-plan-card
+          v-for="(plan, index) in plan_data"
+          :key="index"
+          :plan="plan"
+        />
 
         <tutor-brochure-card />
 
@@ -46,6 +49,36 @@ export default {
     tutorBrochureCard,
     tutorSpirals,
   },
+
+  data: () => ({
+    plan_data: [
+      {
+        title: "1-on-1 Tutoring ",
+        value: "₦2,500",
+        description:
+          "Private lessons focused on your child’s specific needs and goals.",
+        highlights: [
+          "Rewatch class recordings",
+          "4,000+ Assessment per Class & Weekly Reports",
+          "Illustrative Video Lessons comes with each Monthly Plan",
+        ],
+        type: "single",
+      },
+
+      {
+        title: "Small Group Tutoring",
+        value: "₦1,000",
+        description:
+          "Group lessons tailored to each child’s specific learning needs and goals",
+        highlights: [
+          "Small classes of 3-5 students ",
+          "Individualized Learning Path",
+          "Weekly improvement reports",
+        ],
+        type: "group",
+      },
+    ],
+  }),
 };
 </script>
 
@@ -62,6 +95,20 @@ export default {
   .title-text {
     @include font-height(36, 60);
     margin-bottom: toRem(47);
+
+    @include breakpoint-down(lg) {
+      @include font-height(34, 56);
+    }
+
+    @include breakpoint-down(md) {
+      @include font-height(30, 48);
+      margin-bottom: toRem(40);
+    }
+
+    @include breakpoint-down(xs) {
+      @include font-height(26, 42);
+      margin-bottom: toRem(36);
+    }
   }
 
   .plan-row {
@@ -72,6 +119,10 @@ export default {
     position: absolute;
     z-index: -1;
     bottom: 0;
+
+    @include breakpoint-down(xl) {
+      display: none;
+    }
   }
 
   .left-spiral {

@@ -41,7 +41,7 @@
         </div>
 
         <!-- BOOK SESSION CTA -->
-        <button class="btn btn-accent left-btn">
+        <button class="btn btn-accent left-btn" @click="toggleOneOnOneModal">
           Book a Free 1-on-1 Session
         </button>
       </div>
@@ -70,17 +70,51 @@
         />
 
         <!-- BOOK SESSION CTA -->
-        <button class="btn btn-accent right-btn">
+        <button class="btn btn-accent right-btn" @click="toggleOneOnOneModal">
           Book a Free 1-on-1 Session
         </button>
       </div>
     </div>
+
+    <!-- MODALS -->
+    <portal to="gradely-modals">
+      <transition name="fade" v-if="show_one_on_one_modal">
+        <one-on-one-modal @closeTriggered="toggleOneOnOneModal" />
+      </transition>
+
+      <transition name="fade" v-if="show_auth_modal">
+        <tutor-auth-modal @closeTriggered="toggleAuthModal" />
+      </transition>
+    </portal>
   </div>
 </template>
 
 <script>
+import oneOnOneModal from "@/modules/tutor/modals/one-on-one-modal";
+import tutorAuthModal from "@/modules/tutor/modals/tutor-auth-modal";
+
 export default {
   name: "tutorHeroSection",
+
+  components: {
+    oneOnOneModal,
+    tutorAuthModal,
+  },
+
+  data: () => ({
+    show_one_on_one_modal: false,
+    show_auth_modal: true,
+  }),
+
+  methods: {
+    toggleOneOnOneModal() {
+      this.show_one_on_one_modal = !this.show_one_on_one_modal;
+    },
+
+    toggleAuthModal() {
+      this.show_auth_modal = !this.show_auth_modal;
+    },
+  },
 };
 </script>
 

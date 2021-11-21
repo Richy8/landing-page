@@ -10,7 +10,7 @@
     "
     @click="toggleOverlay"
   >
-    <img :src="loadAsset('ParentOne.png', 'tutor')" alt="" />
+    <img :src="loadAsset(parent_image, 'tutor')" alt="" />
 
     <!-- VIDEO BUTTON -->
     <div class="video-btn rounded-30 white-text-bg smooth-transition pointer">
@@ -28,7 +28,7 @@
         h-100
         smooth-transition
       "
-      v-if="show_overlay"
+      v-if="!show_overlay"
     ></div>
   </div>
 </template>
@@ -37,9 +37,20 @@
 export default {
   name: "parentCard",
 
-  data: () => ({
-    show_overlay: true,
-  }),
+  props: {
+    parent_image: String,
+
+    active: {
+      type: Boolean,
+      default: false,
+    },
+  },
+
+  data() {
+    return {
+      show_overlay: this.active,
+    };
+  },
 
   methods: {
     toggleOverlay() {
@@ -55,8 +66,43 @@ export default {
   width: toRem(238);
   height: toRem(310);
 
+  @include breakpoint-down(xl) {
+    width: toRem(220);
+    height: toRem(290);
+  }
+
+  @include breakpoint-down(lg) {
+    width: toRem(180);
+    height: toRem(250);
+  }
+
+  @include breakpoint-custom-down(840) {
+    width: toRem(160);
+    height: toRem(230);
+  }
+
+  @include breakpoint-down(md) {
+    width: toRem(160);
+    height: toRem(160);
+  }
+
+  @include breakpoint-down(sm) {
+    width: toRem(120);
+    height: toRem(120);
+    border-radius: toRem(18);
+  }
+
+  @include breakpoint-down(xs) {
+    width: toRem(80);
+    height: toRem(80);
+  }
+
   img {
     @include background-cover;
+
+    @include breakpoint-down(md) {
+      background-position: start center;
+    }
   }
 
   .video-btn {
@@ -67,6 +113,19 @@ export default {
     bottom: toRem(20);
     left: toRem(20);
 
+    @include breakpoint-custom-down(840) {
+      left: toRem(15);
+      bottom: toRem(15);
+      padding: toRem(7) toRem(12);
+    }
+
+    @include breakpoint-down(sm) {
+      padding: 0 !important;
+      height: toRem(20);
+      @include center-placement;
+      //   background-color: transparent !important;
+    }
+
     &:hover {
       transform: scale(0.98);
     }
@@ -74,18 +133,31 @@ export default {
     .icon {
       margin-right: toRem(10);
       font-size: toRem(20);
+
+      @include breakpoint-down(sm) {
+        font-size: toRem(28);
+        margin-right: 0;
+      }
     }
 
     .text {
       @include font-height(14, 19);
+
+      @include breakpoint-custom-down(840) {
+        @include font-height(12, 18);
+      }
+
+      @include breakpoint-down(sm) {
+        display: none;
+      }
     }
   }
 
   .card-overlay {
     background: linear-gradient(
       0deg,
-      rgba($black-text, 0.75),
-      rgba($black-text, 0.75)
+      rgba($black-text, 0.25),
+      rgba($black-text, 0.25)
     );
   }
 }

@@ -1,7 +1,7 @@
 <template>
-  <div class="wavy-bg position-absolute">
+  <div class="wavy-bg position-absolute w-100 h-100">
     <svg viewBox="0 0 278 170" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="277.5" height="170" rx="20" :fill="card_color" />
+      <rect width="277.5" height="100%" rx="20" :fill="card_color" />
       <g style="mix-blend-mode: overlay" opacity="0.2">
         <mask
           id="mask0_1743_3655"

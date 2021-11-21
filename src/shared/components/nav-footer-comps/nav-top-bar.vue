@@ -11,8 +11,8 @@
 
       <!-- NAV OPTIONS -->
       <div class="nav-options smooth-animation">
-        <a href="#" target="_blank" class="nav-item link-item">For Parents</a>
-        <a href="#" target="_blank" class="nav-item link-item">For Schools</a>
+        <a href="https://gradely.ng/for-parent" target="_blank" class="nav-item link-item">For Parents</a>
+        <a href="https://gradely.ng/for-schools" target="_blank" class="nav-item link-item">For Schools</a>
 
         <!-- NAV WITH DROPDOWN -->
         <div
@@ -36,16 +36,16 @@
             class="nav-dropdown rounded-5 box-shadow-effect smooth-animation"
             v-if="show_dropdown"
           >
-            <a href="" target="_blank" class="item">About Us</a>
-            <a href="" target="_blank" class="item">Blog</a>
-            <a href="" target="_blank" class="item">Help Center</a>
-            <a href="" target="_blank" class="item">Contact Us</a>
+            <a href="https://gradely.ng/about" target="_blank" class="item">About Us</a>
+            <a href="https://gradely.ng/blog" target="_blank" class="item">Blog</a>
+            <a href="https://gradely.ng/help-center" target="_blank" class="item">Help Center</a>
+            <a href="https://gradely.ng/contact" target="_blank" class="item">Contact Us</a>
           </div>
         </div>
 
-        <a href="#" target="_blank" class="nav-item link-item">Sign Up</a>
+        <a href="https://gradely.ng/signup/lander" target="_blank" class="nav-item link-item">Sign Up</a>
 
-        <a href="#" target="_blank" class="btn btn-accent">Log In</a>
+        <a href="https://app.gradely.ng/login?summer=true" target="_blank" class="btn btn-accent">Log In</a>
 
         <!-- MENU TOGGLER -->
         <div class="menu-toggler pointer" @click="toggleMobileMenu">

@@ -12,40 +12,40 @@
         <div class="link-column">
           <div class="title-text">Inside Gradely</div>
 
-          <a href="" class="link-text">Home</a>
-          <a href="" class="link-text">About Gradely</a>
-          <a href="" class="link-text">Blog</a>
-          <a href="" class="link-text">Contact Us</a>
-          <a href="" class="link-text">Guides & How-tos</a>
+          <a href="https://gradely.ng/" class="link-text">Home</a>
+          <a href="https://gradely.ng/about" class="link-text">About Gradely</a>
+          <a href="https://gradely.ng/blog" class="link-text">Blog</a>
+          <a href="https://gradely.ng/contact-us" class="link-text">Contact Us</a>
+          <a href="https://gradely.ng/help-centre" class="link-text">Guides & How-tos</a>
         </div>
 
         <!-- PRODUCT LINK COLUMN  -->
         <div class="link-column">
           <div class="title-text">Products</div>
 
-          <a href="" class="link-text">For Schools</a>
-          <a href="" class="link-text">For Parents</a>
-          <a href="" class="link-text">Tutoring</a>
-          <a href="" class="link-text">Catchup!</a>
-          <a href="" class="link-text">Covid-19</a>
+          <a href="https://gradely.ng/for-schools" class="link-text">For Schools</a>
+          <a href="https://gradely.ng/for-parents" class="link-text">For Parents</a>
+          <a href="https://summer.gradely.ng/#" class="link-text">Tutoring</a>
+          <a href="https://summer.gradely.ng/#" class="link-text">Catchup!</a>
+          <a href="https://summer.gradely.ng/#" class="link-text">Covid-19</a>
         </div>
 
         <!-- ACCOUNT LINK COLUMN  -->
         <div class="link-column">
           <div class="title-text">Account</div>
 
-          <a href="" class="link-text">Sign up as a Student</a>
-          <a href="" class="link-text">Sign up as a Parent</a>
-          <a href="" class="link-text">Sign up as a Teacher</a>
-          <a href="" class="link-text">Sign up as a School</a>
-          <a href="" class="link-text">Become a Tutor</a>
+          <a href="https://app.gradely.ng/student/signup" class="link-text">Sign up as a Student</a>
+          <a href="https://app.gradely.ng/parent/signup" class="link-text">Sign up as a Parent</a>
+          <a href="https://app.gradely.ng/teacher/signup" class="link-text">Sign up as a Teacher</a>
+          <a href="https://app.gradely.ng/school/signup" class="link-text">Sign up as a School</a>
+          <a href="https://gradely.ng/for-schools/tutor_signup.html" class="link-text">Become a Tutor</a>
         </div>
 
         <!-- SUPPORT LINK COLUM  -->
         <div class="link-column">
           <div class="title-text">Support</div>
 
-          <a href="" class="link-text support-link-text">
+          <a href="https://wa.link/ydy5yo" class="link-text support-link-text">
             <img :src="loadAsset('CallPhone.png')" alt="call_gradely" />
             <div class="text">(+234) 810 059 8268</div>
           </a>
@@ -55,35 +55,35 @@
             <div class="text">support@gradely.ng</div>
           </a>
 
-          <a href="" class="link-text support-link-text">
+          <a href="mailto:support@gradely.ng" class="link-text support-link-text">
             <img :src="loadAsset('Whatsapp.png')" alt="whatsapp_gradely" />
             <div class="text">(+234) 810 059 8268</div>
           </a>
 
-          <a href="" class="link-text support-link-text">
+          <a href="https://gradely.ng/help-centre/" class="link-text support-link-text">
             <img :src="loadAsset('QuestionCircle.png')" alt="gradely_help" />
             <div class="text">Visi Help center</div>
           </a>
 
           <!-- SOCIAL ROW -->
           <div class="social-row">
-            <a href="" class="social-link" title="Follow on facebook">
+            <a href="https://www.facebook.com/gradelyng/" class="social-link" title="Follow on facebook">
               <div class="icon icon-facebook"></div>
             </a>
 
-            <a href="" class="social-link" title="Follow on instagram">
+            <a href="https://www.instagram.com/gradelyng/" class="social-link" title="Follow on instagram">
               <div class="icon icon-instagram"></div>
             </a>
 
-            <a href="" class="social-link" title="Follow on twitter">
+            <a href="https://www.twitter.com/gradelyng" class="social-link" title="Follow on twitter">
               <div class="icon icon-twitter"></div>
             </a>
 
-            <a href="" class="social-link" title="Subscribe on youtube">
+            <a href="https://www.youtube.com/channel/UCsiHe1Qm8SZ_8LD5zkEY1Rw/" class="social-link" title="Subscribe on youtube">
               <div class="icon icon-youtube"></div>
             </a>
 
-            <a href="" class="social-link" title="Connect on linkedin">
+            <a href="https://www.linkedin.com/company/gradelyng/about/" class="social-link" title="Connect on linkedin">
               <div class="icon icon-linkedin"></div>
             </a>
           </div>
@@ -101,8 +101,8 @@
 
         <!-- RIGHT SECTION -->
         <div class="right-section">
-          <a href="" class="text text-one">Terms & Conditions</a>
-          <a href="" class="text text-two">Privacy Policies</a>
+          <a href="https://gradely.ng/terms/" class="text text-one">Terms & Conditions</a>
+          <a href="https://gradely.ng/privacy-policy/" class="text text-two">Privacy Policies</a>
         </div>
       </div>
     </div>

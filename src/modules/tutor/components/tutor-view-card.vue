@@ -13,7 +13,7 @@
       </div>
 
       <!-- TUTOR IMAGE -->
-      <img :src="loadAsset(tutor.image, 'tutor')" alt="" class="tutor-img" />
+      <img :src="tutor.image" alt="" class="tutor-img" />
     </div>
 
     <!-- TOP TEXT -->
@@ -22,13 +22,13 @@
     </div>
 
     <!-- MID TEXT -->
-    <div class="mid-text brand-navy font-weight-700">{{ tutor.topic }}</div>
+    <div class="mid-text brand-navy font-weight-700">{{ tutor.topic.topic }}</div>
 
     <!-- BOTTOM TEXT -->
     <div class="bottom-text color-grey-dark">
-      <span class="date-time">{{ tutor.date }}</span>
+      <span class="date-time">{{ `${tutor.session_date}  ${tutor.session_time}` }}</span>
       <span class="dot"></span>
-      <span class="class-name">{{ tutor.class }}</span>
+      <span class="class-name">{{ tutor.class.class_name }}</span>
       <span class="dot"></span>
       <span class="status brand-tonic font-weight-700 text-uppercase">{{
         tutor.status

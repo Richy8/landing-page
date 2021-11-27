@@ -29,7 +29,7 @@
           ref="tutorRow"
         >
           <tutor-view-card
-            v-for="(tutor, index) in tutors"
+            v-for="(tutor, index) in tutors_from_api"
             :key="index"
             :tutor="tutor"
             :card_color="tutor.background"
@@ -55,9 +55,13 @@
 
 <script>
 import tutorViewCard from "@/modules/tutor/components/tutor-view-card";
+import { mapActions } from "vuex";
 
 export default {
   name: "recentTutorSection",
+  mounted() {
+    this.fetchAllLiveTutors();
+  },
 
   components: {
     tutorViewCard,
@@ -102,9 +106,29 @@ export default {
         background: "#FDE1B5",
       },
     ],
+    tutors_from_api: [],
+    tutors_bg: ["#FCEACF", "#DBF5F8", "#FFDCDE", "#FDE1B5"],
+    limit: 4,
   }),
 
   methods: {
+    ...mapActions({ getLiveTutors: "dbTutor/getLiveTutors" }),
+
+    fetchAllLiveTutors() {
+      this.getLiveTutors(this.limit)
+        .then((response) => {
+          if (response.code == 200) {
+            let counter = 0;
+            for (let tutor of response.data) {
+              tutor.background = this.tutors_bg[counter];
+              counter++;
+            }
+            this.tutors_from_api = response.data;
+            console.log(this.tutors_from_api);
+          }
+        })
+        .catch((error) => console.log(error));
+    },
     scrollTutors(scroll_value) {
       let tutor_row = this.$refs.tutorRow;
       tutor_row.scrollLeft += scroll_value;

@@ -92,9 +92,10 @@
         />
       </transition>
       <transition name="fade" v-if="show_start_pretest_modal">
-        <start-pretest-modal :redirect_url="redirect_url">
-
-        </start-pretest-modal>
+        <start-pretest-modal
+          :redirect_url="redirect_url"
+          :subject="one_on_one_form.lesson_subject_name"
+        ></start-pretest-modal>
       </transition>
     </portal>
   </div>
@@ -104,7 +105,7 @@
 import oneOnOneModal from "@/modules/tutor/modals/one-on-one-modal";
 import tutorAuthModal from "@/modules/tutor/modals/tutor-auth-modal";
 import startPretestModal from "@/modules/tutor/modals/start-pretest-modal";
-import {APP_BASE_URL} from '@/env'
+import { APP_BASE_URL } from "@/env";
 
 import { mapActions } from "vuex";
 
@@ -114,7 +115,7 @@ export default {
   components: {
     oneOnOneModal,
     tutorAuthModal,
-    startPretestModal
+    startPretestModal,
   },
 
   data: () => ({
@@ -127,9 +128,10 @@ export default {
       lesson_subject: "",
       date_time: null,
       child_class: null,
+      lesson_subject_name: "",
     },
 
-    redirect_url: '',
+    redirect_url: "",
     student_id: null,
 
     parent_account_form: {
@@ -183,9 +185,9 @@ export default {
         .then((response) => {
           if (response.code === 200) {
             console.log(response.data);
-            this.student_id = response.data.id
-            this.redirect_url = `${APP_BASE_URL}/sms/login/${this.parent_account_form.token}?path=catchup/resources/${this.student_id}`
-            // this.show_start_pretest_modal = true;
+            this.student_id = response.data.id;
+            this.redirect_url = `${APP_BASE_URL}/sms/login/${this.parent_account_form.token}?path=catchup/resources/${this.student_id}`;
+            this.show_start_pretest_modal = true;
           }
         })
         .catch((error) => {
@@ -194,7 +196,6 @@ export default {
     },
 
     submitChildInfoHandler(childDataForm) {
-
       this.toggleOneOnOneModal();
 
       this.one_on_one_form = childDataForm;
@@ -203,14 +204,11 @@ export default {
     },
 
     parentSignedUpSuccessfullyHandler(parentDataForm) {
-
       this.parent_account_form = parentDataForm;
-      console.log(this.parent_account_form);
 
       this.bookSessionHandler();
 
       this.signupStudentHandler();
-
     },
 
     bookSessionHandler() {

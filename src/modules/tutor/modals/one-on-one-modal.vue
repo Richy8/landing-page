@@ -186,13 +186,19 @@ export default {
 
   watch: {
     'form.lesson_subject': function() {
-      console.log(this.form.lesson_subject);
+      const subjectObj = this.subjects.find(subject => subject.id === this.form.lesson_subject);
+      if (subjectObj) {
+        this.form.lesson_subject_name = subjectObj.name;
+      }
     },
   },
+  created() {
+    
+    },
 
   mounted() {
-    this.fetchAllClasses();
     this.setDateMin();
+    this.fetchAllClasses();
   },
 
   methods: {
@@ -203,10 +209,12 @@ export default {
 
     setDateMin() {
       const date = new Date();
+      const customHours = date.getHours() <= 9 ? `0${date.getHours()}` : date.getHours();
       this.minDateTime = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}T${
-        date.getHours() + 2
-      }:${date.getMinutes()}`;
+        customHours
+      }:${date.getMinutes()}:00`;
       this.$refs.minDate.min = this.minDateTime;
+      
     },
 
     fetchAllClasses() {
@@ -252,9 +260,9 @@ export default {
       let todayPlusTwoHrs = addHours(new Date(), 2);
 
       if (todayPlusTwoHrs < createdDate) {
-        console.log(true);
+        console.log("Time is valid");
       } else {
-        console.log(false);
+        console.log("Time is invalid");
       }
       if (!this.free) return this.$emit("submitChildInfoPaid", this.form);
 

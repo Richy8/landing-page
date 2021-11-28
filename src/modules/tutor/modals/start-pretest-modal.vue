@@ -20,7 +20,7 @@
         <div class="body-text text-center mgt-19">
           <p class="text-center description-text ">
             Thank you, your free
-          <span class="font-weight-900">Mathematics</span> class been booked for
+          <span class="font-weight-900">{{subject}}</span> class been booked for
           <span class="font-weight-900">Friday, 24th Dec, 2021 at </span>
           <span class="font-weight-900">12:45 pm</span>
           </p>
@@ -55,7 +55,7 @@ export default {
       default: ""
     },
     date: {
-      type: Date,
+      type: String,
       default: "",
     },
     time: {
@@ -64,7 +64,7 @@ export default {
     },
     subject: {
       type: String,
-      default: "",
+      default: "Mathematics",
     }
 
   }

@@ -156,7 +156,6 @@ export default {
             console.log(response.data);
             this.student_id = response.data.id;
             this.redirect_url = `${APP_BASE_URL}/sms/login/${this.parent_account_form.token}?path=parent/settings/tutoring-plan`;
-            // this.show_start_pretest_modal = true;
             window.location.href = this.redirect_url;
           }
         })
@@ -169,7 +168,6 @@ export default {
       this.toggleOneOnOneModal();
 
       this.one_on_one_form = childDataForm;
-      console.log(this.one_on_one_form);
 
       this.toggleAuthModal();
     },

@@ -124,7 +124,6 @@ export default {
               counter++;
             }
             this.tutors_from_api = response.data;
-            console.log(this.tutors_from_api);
           }
         })
         .catch((error) => console.log(error));

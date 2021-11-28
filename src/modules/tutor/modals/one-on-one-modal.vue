@@ -19,7 +19,7 @@
       <div class="modal-cover-body">
         <!-- TITLE TEXT -->
         <div class="title-text text-center font-weight-700 color-grey-dark">
-          Book a Free 1-on-1 Session
+          Book a {{ free ? "Free" : "" }} 1-on-1 Session
         </div>
 
         <div class="form-area mgt-17">
@@ -71,6 +71,7 @@
                 class="form-control"
                 placeholder="Enter the name of your child"
                 required
+                v-model="form.child_name"
               />
             </div>
 
@@ -79,10 +80,20 @@
               <label for="childClass" class="label-compact label-sm"
                 >Child's Class
               </label>
-              <select class="form-control" id="childClass">
+              <select
+                v-model="form.child_class"
+                class="form-control"
+                id="childClass"
+                @change="fechClassSubjects"
+              >
                 <option disabled selected value="">Select Class</option>
-                <option value="">Junior Secondary School 1</option>
-                <option value="">Senior Secondary School 2</option>
+                <option
+                  :value="class_item.id"
+                  v-for="class_item in class_list"
+                  :key="class_item.id"
+                >
+                  {{ class_item.description }}
+                </option>
               </select>
             </div>
           </template>
@@ -92,10 +103,19 @@
             <label for="lessonSubject" class="label-compact label-sm"
               >Lesson Subject
             </label>
-            <select class="form-control" id="lessonSubject">
+            <select
+              v-model="form.lesson_subject"
+              class="form-control"
+              id="lessonSubject"
+            >
               <option disabled selected value="">Select lesson subject</option>
-              <option value="">English language</option>
-              <option value="">Mathematics</option>
+              <option
+                :value="subject.id"
+                v-for="subject in subjects"
+                :key="subject.id"
+              >
+                {{ subject.name }}
+              </option>
             </select>
           </div>
 
@@ -109,6 +129,8 @@
               id="lessonDateTime"
               class="form-control"
               required
+              v-model="form.date_time"
+              ref="minDate"
             />
           </div>
         </div>
@@ -118,7 +140,9 @@
     <!-- MODAL FOOTER  -->
     <template slot="modal-cover-footer">
       <div class="modal-cover-footer d-flex justify-content-center mgb-15">
-        <button class="btn btn-accent gfont-10-5">Book your Free Class</button>
+        <button class="btn btn-accent gfont-10-5" @click="submitChildInfo">
+          Book your {{ free ? "free" : "" }} Class
+        </button>
       </div>
     </template>
   </modal-cover>
@@ -126,6 +150,8 @@
 
 <script>
 import modalCover from "@/shared/components/global-comps/modal-cover";
+import { mapActions } from "vuex";
+import { addHours } from "date-fns";
 
 export default {
   name: "oneOnOneModal",
@@ -136,11 +162,111 @@ export default {
 
   data: () => ({
     connected: false,
+    show_lesson_subjects: false,
+    minDateTime: "",
+    
+    form: {
+      child_name: "",
+      child_class: null,
+      lesson_subject: null,
+      date_time: null,
+      lesson_subject_name: "",
+    },
+
+    class_list: [],
+    subjects: [],
   }),
 
+  props: {
+    free: {
+      type: Boolean,
+      default: true,
+    }
+  },
+
+  watch: {
+    'form.lesson_subject': function() {
+      const subjectObj = this.subjects.find(subject => subject.id === this.form.lesson_subject);
+      if (subjectObj) {
+        this.form.lesson_subject_name = subjectObj.name;
+      }
+    },
+  },
+  created() {
+    
+    },
+
+  mounted() {
+    this.setDateMin();
+    this.fetchAllClasses();
+  },
+
   methods: {
+    ...mapActions({
+      getAllClasses: "dbTutor/getAllClasses",
+      getClassSubjects: "dbTutor/getClassSubjects",
+    }),
+
+    setDateMin() {
+      const date = new Date();
+      const customHours = date.getHours() <= 9 ? `0${date.getHours()}` : date.getHours();
+      this.minDateTime = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}T${
+        customHours
+      }:${date.getMinutes()}:00`;
+      this.$refs.minDate.min = this.minDateTime;
+      
+    },
+
+    fetchAllClasses() {
+      this.getAllClasses()
+        .then((response) => {
+          this.class_list = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    fechClassSubjects() {
+      this.class_id = this.form.child_class;
+      this.getClassSubjects(this.class_id)
+        .then((response) => {
+          this.subjects = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
     toggleConnection() {
       this.connected = !this.connected;
+    },
+
+    submitChildInfo() {
+      // TODO... check if date and time is valid;
+      let formattedDateTime = this.form.date_time.split("T");
+
+      const date = formattedDateTime[0].split("-");
+      const time = formattedDateTime[1].split(":");
+
+      let createdDate = new Date(
+        date[0],
+        Number(date[1] - 1),
+        date[2],
+        time[0],
+        time[1]
+      );
+
+      let todayPlusTwoHrs = addHours(new Date(), 2);
+
+      if (todayPlusTwoHrs < createdDate) {
+        console.log("Time is valid");
+      } else {
+        console.log("Time is invalid");
+      }
+      if (!this.free) return this.$emit("submitChildInfoPaid", this.form);
+
+      this.$emit("submitChildInfo", this.form);
     },
   },
 };

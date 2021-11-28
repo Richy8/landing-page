@@ -21,29 +21,32 @@
           <div class="top mgb-20">
             <div class="avatar rounded-8 brand-inverse-light-bg">
               <!-- TUTOR IMAGE -->
-              <img
-                :src="loadAsset('damola.png', 'tutor')"
-                alt=""
-                class="tutor-img"
-              />
+              <img :src="tutor_details.image" alt="Tutor" class="tutor-img" />
             </div>
 
             <div class="info">
               <!-- LIVE ALERT -->
-              <div class="live-alert-card rounded-15 mgb-12">
+              <div
+                class="live-alert-card rounded-15 mgb-12"
+                v-if="tutor_details.live_status"
+              >
                 <div class="live-alert rounded-circle mgr-5"></div>
                 <div class="live-text color-text font-weight-700">LIVE</div>
               </div>
               <!-- TUTOR NAME -->
-              <div class="tutor-name color-ash">Gloria Elendu</div>
+              <div class="tutor-name color-ash">{{ tutor_details.name }}</div>
 
               <!-- TUTOR TOPIC -->
               <div class="tutor-topic brand-navy font-weight-700">
-                Grammar - Argumentative Pronouns
+                {{ tutor_details.topic.topic }}
               </div>
 
               <!-- TUTOR DATE -->
-              <div class="tutor-date color-grey-dark">Sat, Nov 6, 2:45 PM</div>
+              <div class="tutor-date color-grey-dark">
+                {{
+                  `${tutor_details.session_date} ${tutor_details.session_time}`
+                }}
+              </div>
             </div>
           </div>
 
@@ -52,7 +55,7 @@
               <img :src="loadAsset('grad.svg')" alt="" />
               <div class="info">
                 <div class="title-text mgb-4 brand-navy font-weight-700">
-                  English Language
+                  {{ tutor_details.subject.name }}
                 </div>
 
                 <div class="meta-text color-grey-dark">Subject</div>
@@ -63,7 +66,9 @@
               <img :src="loadAsset('slack.svg')" alt="" />
               <div class="info">
                 <div class="title-text mgb-4 brand-navy font-weight-700">
-                  Free
+                  {{
+                    tutor_details.amount == 0 ? "Free" : tutor_details.amount
+                  }}
                 </div>
 
                 <div class="meta-text color-grey-dark">Price</div>
@@ -95,6 +100,7 @@
               >Child's Name</label
             >
             <input
+              v-model.trim="form.child_name"
               type="text"
               id="childName"
               class="form-control"
@@ -112,7 +118,9 @@
         class="modal-cover-footer d-flex flex-column align-items-center mgb-15"
         style="margin-top: -15px"
       >
-        <button class="btn btn-accent gfont-10-5">Book Session</button>
+        <button class="btn btn-accent gfont-10-5" @click="submitChildInfo">
+          Book Session
+        </button>
 
         <div class="help-text color-grey-dark mgt-18">
           {{
@@ -142,14 +150,38 @@ export default {
     modalCover,
     tutorWavyBg,
   },
+  mounted() {
+    this.form.child_class = this.tutor_details.class.id;
+    this.form.lesson_subject = this.tutor_details.subject.id;
+    this.form.date = this.tutor_details.session_date;
+    this.form.time = this.tutor_details.session_time;
+    this.form.lesson_subject_name = this.tutor_details.subject.name;
+  },
 
   data: () => ({
     connected: false,
+    form: {
+      child_name: "",
+      child_class: null,
+      lesson_subject: null,
+      date: "",
+      time: "",
+      lesson_subject_name: "",
+    },
   }),
+
+  props: {
+    tutor_details: {
+      type: Object,
+    },
+  },
 
   methods: {
     toggleConnection() {
       this.connected = !this.connected;
+    },
+    submitChildInfo() {
+      this.$emit("submitChildInfo", this.form);
     },
   },
 };

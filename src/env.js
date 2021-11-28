@@ -6,7 +6,7 @@ export const API_BASE_URL = "https://testapi.gradely.ng";
 export const NEW_API_VERSION = "v2.1";
 export const NEW_API_BASE_URL = "https://testapi.gradely.co";
 
-export const APP_BASE_URL = "https://testapp.gradely.ng";
+export const APP_BASE_URL = "https://appdev.gradely.ng";
 
 const BASE_DEV_URL = "http://localhost:";
 

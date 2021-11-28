@@ -9,6 +9,7 @@
       <div class="modal-cover-header d-flex justify-content-center">
         <div class="wrapper w-75">
           <div
+          v-if="free"
             class="
               title-text
               text-center
@@ -50,6 +51,7 @@
               class="form-control"
               placeholder="Enter your first & last name"
               required
+              v-model.trim="form.parent_name"
             />
           </div>
 
@@ -59,11 +61,12 @@
               >Email Address</label
             >
             <input
-              type="text"
+              type="email"
               id="parentEmail"
               class="form-control"
               placeholder="Enter your email address"
               required
+              v-model.trim="form.email"
             />
           </div>
 
@@ -98,6 +101,7 @@
                 class="form-control"
                 required
                 placeholder="Enter phone number"
+                v-model.trim="form.phone_number"
               />
             </div>
           </div>
@@ -115,6 +119,7 @@
                 id="password"
                 required
                 placeholder="Create a password"
+                v-model.trim="form.password"
               />
 
               <!-- ADDON  -->
@@ -139,7 +144,7 @@
       <div
         class="modal-cover-footer d-flex flex-column align-items-center mgb-15"
       >
-        <button class="btn btn-accent gfont-10-5">
+        <button class="btn btn-accent gfont-10-5" @click="signupParentHandler">
           {{ is_sign_up ? "CREATE ACCOUNT" : "LOG iN" }}
         </button>
 
@@ -162,6 +167,7 @@
 
 <script>
 import modalCover from "@/shared/components/global-comps/modal-cover";
+import { mapActions } from "vuex";
 
 export default {
   name: "tutorAuthModal",
@@ -170,12 +176,57 @@ export default {
     modalCover,
   },
 
+  props: {
+    free: {
+      type: Boolean,
+      default: true,
+    }
+  },
+
   data: () => ({
     passwordType: true,
     is_sign_up: true,
+    form: {
+      parent_name: "",
+      password: "",
+      phone_number: null,
+      email: "",
+    },
   }),
 
   methods: {
+    ...mapActions({ signupParent: "dbTutor/signupParent" }),
+
+    // SIGNUP PARENT
+    signupParentHandler() {
+      const parentNames = this.form.parent_name.split(" ");
+
+      const parentInfo = {
+        first_name: parentNames[0],
+        last_name: parentNames[1],
+        email: this.form.email,
+        phone: this.form.phone_number,
+        password: this.form.password
+      }
+
+      this.signupParent(parentInfo).then((response) => {
+        
+        if (response.code === 200) {
+         const importantInfo = {
+           parent_id: response.data.id,
+           token: response.data.token,
+           password: this.form.password
+         }
+         if (!this.free) return this.$emit('pSignedUpSuccessfullyPaid', importantInfo);
+
+         this.$emit('parentSignedUpSuccessfully', importantInfo)
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    },
+
     togglePasswordType() {
       this.passwordType = !this.passwordType;
     },

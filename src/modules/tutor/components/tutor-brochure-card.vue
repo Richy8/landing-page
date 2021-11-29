@@ -19,9 +19,13 @@
       examination you are preparing for.
     </div>
 
-    <button class="btn btn-whitish">
+    <a
+      :href="loadAsset('tutoring.pdf', 'tutor')"
+      download
+      class="btn btn-whitish"
+    >
       Download Broachure <span class="icon-download gfont-16 mgl-10"></span>
-    </button>
+    </a>
   </div>
 </template>
 

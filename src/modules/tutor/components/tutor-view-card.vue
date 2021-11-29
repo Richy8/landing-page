@@ -174,7 +174,6 @@ export default {
     },
 
     bookSessionHandler() {
-      
       // BUILD PAYLOAD DATA
       const payload = {
         class: this.one_on_one_form.child_class,
@@ -182,7 +181,7 @@ export default {
         requester_id: this.parent_account_form.parent_id,
         tutoring_type: "one_on_one",
         name: this.one_on_one_form.child_name,
-        session_date :this.one_on_one_form.date,
+        session_date: this.one_on_one_form.date,
         session_time: this.one_on_one_form.time,
       };
 
@@ -259,6 +258,8 @@ export default {
     .tutor-img {
       @include center-x;
       z-index: 1;
+      height: toRem(155);
+      width: auto;
       bottom: 0;
 
       @include breakpoint-down(lg) {

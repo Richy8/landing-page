@@ -50,7 +50,7 @@
       <div class="image-content">
         <!-- SCREEN -->
         <img
-          :src="loadAsset('TutorHeroScreen.png', 'tutor')"
+          :src="loadAsset('TutorHeroScreen.gif', 'tutor')"
           alt=""
           class="tutor-screen"
         />
@@ -392,13 +392,7 @@ export default {
         }
 
         @include breakpoint-down(xs) {
-          @include font-height(13.25, 21);
-          width: 80%;
-        }
-
-        @include breakpoint-custom-down(360) {
-          @include font-height(12.5, 19);
-          width: 90%;
+          display: none;
         }
       }
 
@@ -417,6 +411,8 @@ export default {
 
         @include breakpoint-down(xs) {
           @include font-height(11.5, 16);
+          margin-top: toRem(10);
+          margin-bottom: toRem(15);
         }
       }
 
@@ -465,10 +461,7 @@ export default {
         position: absolute;
         right: toRem(-10);
         top: toRem(-25);
-
-        @include breakpoint-down(xl) {
-          width: 90%;
-        }
+        width: 90%;
 
         @include breakpoint-down(lg) {
           width: 92%;

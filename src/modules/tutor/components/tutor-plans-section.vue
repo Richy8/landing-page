@@ -86,6 +86,10 @@ export default {
 .tutor-plans-section {
   margin: toRem(100) 0 toRem(90);
 
+  @include breakpoint-down(xs) {
+    margin: toRem(40) 0 toRem(50);
+  }
+
   .pink-shade {
     position: absolute;
     right: 0;
@@ -106,7 +110,7 @@ export default {
     }
 
     @include breakpoint-down(xs) {
-      @include font-height(26, 42);
+      @include font-height(24, 36);
       margin-bottom: toRem(36);
     }
   }

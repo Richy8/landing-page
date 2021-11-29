@@ -55,6 +55,28 @@ export default {
   components: {
     parentCard,
   },
+
+  data() {
+    return {
+      parent_info: [
+        {
+          name: "Mr. Emmanuel Kalu",
+          designation: "Parent (Home Schooling)",
+          testimony:
+            "In the very first few days that they interacted with their online tutor, you could see the relief and sheer enthusiasm they had, wanting to log on to their classes. Even when I’m not present with them, they’re always so happy to go on their classes. That has, and will always be a big plus for their mom and I.",
+          link: "https://youtu.be/EWftcHly-HQ",
+        },
+
+        {
+          name: "Maida",
+          designation: "7 Year Old Student",
+          testimony:
+            "With other online learning platforms, they don’t ask for what you need help with, or don’t know. They just start from addition, to subtraction, and then multiplication, without bothering to know if you understand. Gradely helped to change that and that’s why my favorite subject is now Math!",
+          link: "https://youtu.be/z-ENEtnMXX8",
+        },
+      ],
+    };
+  },
 };
 </script>
 
@@ -124,10 +146,6 @@ export default {
         @include breakpoint-down(lg) {
           @include font-height(14, 28);
         }
-
-        @include breakpoint-down(xs) {
-          @include font-height(13, 24);
-        }
       }
 
       .title-text {
@@ -135,7 +153,7 @@ export default {
         margin-bottom: toRem(5);
 
         @include breakpoint-down(xs) {
-          @include font-height(13, 18);
+          @include font-height(13.75, 19);
         }
       }
 
@@ -143,7 +161,7 @@ export default {
         @include font-height(13, 18);
 
         @include breakpoint-down(xs) {
-          @include font-height(12, 17);
+          @include font-height(12.75, 17);
         }
       }
     }

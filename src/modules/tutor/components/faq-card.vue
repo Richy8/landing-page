@@ -67,7 +67,7 @@ export default {
       }
 
       @include breakpoint-down(xs) {
-        @include font-height(13, 21);
+        @include font-height(13.5, 22);
       }
     }
 
@@ -91,7 +91,7 @@ export default {
     }
 
     @include breakpoint-down(sm) {
-      @include font-height(12.5, 19);
+      @include font-height(12.85, 20);
     }
   }
 }

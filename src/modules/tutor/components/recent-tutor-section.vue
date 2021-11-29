@@ -149,6 +149,14 @@ export default {
     margin: toRem(370) 0 toRem(20);
   }
 
+  @include breakpoint-down(sm) {
+    margin: toRem(260) 0 toRem(20);
+  }
+
+  @include breakpoint-down(xs) {
+    margin: toRem(120) 0 0;
+  }
+
   .gradely-container {
     .meta-text {
       @include font-height(14, 19);

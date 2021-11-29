@@ -10,6 +10,11 @@ export const APP_BASE_URL = "https://appdev.gradely.ng";
 
 const BASE_DEV_URL = "http://localhost:";
 
+export const LOGIN_URL = {
+  dev: BASE_DEV_URL + "8085/login",
+  prod: `${APP_BASE_URL}/login`,
+};
+
 const environment = process.env.NODE_ENV;
 
 const environmentBase = () =>

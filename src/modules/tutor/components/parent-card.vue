@@ -10,35 +10,68 @@
     "
     @click="toggleOverlay"
   >
-    <img :src="loadAsset(parent_image, 'tutor')" alt="" />
+    <img
+      :src="loadAsset(parent_info.thumbnail, 'tutor')"
+      alt=""
+      class="smooth-transition"
+      :class="{ 'grey-scale': !active }"
+    />
+    <!-- <video :src="parent_link"></video> -->
 
     <!-- VIDEO BUTTON -->
-    <div class="video-btn rounded-30 white-text-bg smooth-transition pointer">
-      <div class="icon icon-play-bg brand-accent"></div>
+    <div
+      class="
+        video-btn
+        rounded-30
+        white-text-bg
+        smooth-transition
+        pointer
+        index-99
+      "
+      @click="toggleMedia"
+    >
+      <div
+        class="icon icon-play-bg"
+        :class="active ? 'brand-accent' : 'border-grey-dark'"
+      ></div>
       <div class="text color-text">Watch Video</div>
     </div>
 
     <!-- CARD OVERLAY -->
     <div
-      class="
-        card-overlay
-        index-1
-        position-absolute
-        w-100
-        h-100
-        smooth-transition
-      "
-      v-if="!show_overlay"
+      class="index-1 position-absolute w-100 h-100"
+      :class="{ 'card-overlay': !active }"
     ></div>
+
+    <!-- MODALS -->
+    <portal to="gradely-modals">
+      <transition name="fade" v-if="show_media">
+        <video-modal-player
+          :media="{
+            resource: parent_info.link,
+            thumbnail: parent_info.thumbnail,
+          }"
+          @closeTriggered="toggleMedia"
+        />
+      </transition>
+    </portal>
   </div>
 </template>
 
 <script>
+import videoModalPlayer from "@/modules/tutor/modals/video-modal-player";
+
 export default {
   name: "parentCard",
 
+  components: {
+    videoModalPlayer,
+  },
+
   props: {
-    parent_image: String,
+    parent_info: Object,
+
+    index: Number,
 
     active: {
       type: Boolean,
@@ -49,12 +82,18 @@ export default {
   data() {
     return {
       show_overlay: this.active,
+      show_media: false,
     };
   },
 
   methods: {
     toggleOverlay() {
       this.show_overlay = !this.show_overlay;
+      this.$emit("updateIndex", this.index);
+    },
+
+    toggleMedia() {
+      this.show_media = !this.show_media;
     },
   },
 };
@@ -103,6 +142,10 @@ export default {
     @include breakpoint-down(md) {
       background-position: start center;
     }
+  }
+
+  .grey-scale {
+    filter: grayscale(1);
   }
 
   .video-btn {
@@ -156,8 +199,8 @@ export default {
   .card-overlay {
     background: linear-gradient(
       0deg,
-      rgba($black-text, 0.25),
-      rgba($black-text, 0.25)
+      rgba($black-text, 0.45),
+      rgba($black-text, 0.45)
     );
   }
 }

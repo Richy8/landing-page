@@ -16,16 +16,15 @@
           />
 
           <div class="text color-ash">
-            This is the testimonial excerpt from the parent testimonial video to
-            the right. It circles round each highlighted parent.
+            {{ parent_info[parent_index].testimony }}
           </div>
 
           <div class="title-text font-weight-700 brand-navy w-100">
-            Oluyemisi Ademiju
+            {{ parent_info[parent_index].name }}
           </div>
 
           <div class="description-text color-grey-dark">
-            Mum to Tinuke, JSS 2 Student
+            {{ parent_info[parent_index].designation }}
           </div>
         </div>
 
@@ -37,9 +36,14 @@
             class="blue-shade"
           />
 
-          <parent-card parent_image="ParentOne.png" active />
-          <parent-card parent_image="ParentTwo.png" :active="false" />
-          <parent-card parent_image="ParentThree.png" :active="false" />
+          <parent-card
+            v-for="(info, index) in parent_info"
+            :key="index"
+            :index="index"
+            :parent_info="info"
+            :active="info.active"
+            @updateIndex="updateCard"
+          />
         </div>
       </div>
     </div>
@@ -56,15 +60,21 @@ export default {
     parentCard,
   },
 
+  mounted() {},
+
   data() {
     return {
+      parent_index: 0,
+
       parent_info: [
         {
           name: "Mr. Emmanuel Kalu",
           designation: "Parent (Home Schooling)",
           testimony:
             "In the very first few days that they interacted with their online tutor, you could see the relief and sheer enthusiasm they had, wanting to log on to their classes. Even when I’m not present with them, they’re always so happy to go on their classes. That has, and will always be a big plus for their mom and I.",
+          thumbnail: "parent-card-one.png",
           link: "https://youtu.be/EWftcHly-HQ",
+          active: true,
         },
 
         {
@@ -72,10 +82,33 @@ export default {
           designation: "7 Year Old Student",
           testimony:
             "With other online learning platforms, they don’t ask for what you need help with, or don’t know. They just start from addition, to subtraction, and then multiplication, without bothering to know if you understand. Gradely helped to change that and that’s why my favorite subject is now Math!",
+          thumbnail: "parent-card-two.png",
           link: "https://youtu.be/z-ENEtnMXX8",
+          active: false,
+        },
+
+        {
+          name: "Mrs. Olomola",
+          designation: "Parent of Deborah Dada",
+          testimony:
+            "The subject I was having issues with was mathematics. Ever since I started using Gradely, learning became fun and mathematics was easier for me.",
+          thumbnail: "parent-card-three.png",
+          link: "https://drive.google.com/file/d/1sLxZItd94gNu5TKW8CZWPe4NoD6EJDA3/view",
+          active: false,
         },
       ],
     };
+  },
+
+  methods: {
+    setupFirstParent() {},
+
+    updateCard($event) {
+      this.parent_index = $event;
+
+      this.parent_info.map((parent) => (parent.active = false));
+      this.parent_info[$event].active = true;
+    },
   },
 };
 </script>
@@ -115,7 +148,7 @@ export default {
 
     .testimonial-section {
       padding-top: toRem(40);
-      width: 22%;
+      width: 24%;
 
       @include breakpoint-down(lg) {
         padding-top: toRem(35);
